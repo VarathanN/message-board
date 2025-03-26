@@ -23,6 +23,17 @@ indexRouter.get("/new", (req, res) => {
   res.render("form");
 })
 
+indexRouter.get("/message/:id", (req, res) => {
+  const messageId = req.params.id;
+  const message = messages[messageId];
+
+  if(!message){
+    res.status("404").send("message not found");
+  }
+
+  res.render("message", {message});
+})
+
 indexRouter.post("/new", (req, res) => {
   messages.push({
     text: req.body.messageText,
